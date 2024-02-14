@@ -1,0 +1,34 @@
+<h3>予定を編集してください</h3>
+
+<%= form_with model: @user do |f| %>
+  <table>
+    <tr>
+      <th><%= f.label :title ,"タイトル" %></th>
+      <td><%= f.text_field :title %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :start_day ,"開始日" %></th>
+      <td><%= f.datetime_field :start_day %></td>
+    </tr>
+
+    <tr>
+      <th><%= f.label :end_day ,"終了日" %></th>
+      <td><%= f.datetime_field :end_day %></td>
+    </tr>
+    
+    <tr>
+    <th><%= f.check_box :all_day, {} %></th><th>終日の場合はチェックを入れます</th>
+    </tr>
+    <tr>
+      <th><%= f.label :schedule_memo ,"スケジュールメモ" %></th>
+      <td><%= f.text_area :schedule_memo %></td>
+    </tr>
+  </table>
+
+  <div>
+    <ul>
+      <li><%= f.submit "保存"%></li>
+      <li><%= link_to "キャンセル", :users %></li>
+    </ul>
+  </div>
+<% end %>

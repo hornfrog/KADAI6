@@ -1,3 +1,11 @@
+<p class="text-center Navbar__text">スケジュール管理アプリ</p>
+
+予定一覧<p><%= link_to "新規追加", :new_user %></p>
+
+<% if flash[:notice] %>
+  <p class="notice"><%= flash[:notice] %></p> 
+<% end %>
+
 <table>
  <thead>
   <tr>
@@ -7,6 +15,9 @@
    <th>終了日</th>
    <th>終日</th>
    <th>更新日時</th>
+   <th>詳細</th>
+   <th>編集</th>
+   <th>削除</th>
   </tr>
 </thead>
 
@@ -15,10 +26,21 @@
   <tr>
    <td><%= user.id %></td>
    <td><%= user.title %></td>
-   <td><%= user.start %></td>
-   <td><%= user.end %></td>
-   <td><%= user.updated_at %></td>
+   <td><%= user.start_day %></td>
+   <td><%= user.end_day %></td>
+   <td><% if user.all_day == true %>
+    ◯
+   <% else  %>
+    
+   <% end %> 
+   <td><%= user.updated_at.to_s(:datetime_jp) %></td>
+   <td><%= link_to "詳細", user %></td>
+   <td><%= link_to "編集", [:edit, user] %>
+   <td><%= button_to "削除", user, method: :delete, data: { confirm: "予定を削除しますか？" } %></td>
   </tr>
 <% end %>
  </tbody>
 </table>
+
+<p> 予定の合計数 <%= @users_total %> </p>
+<p> 本日の日付 <%= Time.now.strftime("%Y年%m月%d日") %></p>
